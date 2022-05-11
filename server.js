@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const axios = require("axios");
 const cors = require("cors");
+const path = require('path');
 require("dotenv").config();
 
 const API_BASE_URL = process.env.API_BASE_URL;
@@ -10,6 +11,8 @@ const API_KEY_NAME = process.env.API_KEY_NAME;
 const API_KEY = process.env.API_KEY;
 
 app.use(cors());
+
+app.use(express.static(path.join(__dirname)));
 
 app.get("/", async (req, res) => {
   try {
@@ -30,6 +33,4 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Listening on port 5000");
-});
+app.listen(process.env.PORT || 3000);
